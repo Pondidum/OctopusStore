@@ -6,5 +6,6 @@ namespace OctopusStore
 	{
 		Uri OctopusHost { get; }
 		string VariableSetName { get; }
+		string OctopusApiKey { get; }
 	}
 }

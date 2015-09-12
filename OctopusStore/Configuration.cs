@@ -7,10 +7,12 @@ namespace OctopusStore
 	{
 		public Uri OctopusHost { get; }
 		public string VariableSetName { get; }
+		public string OctopusApiKey { get; }
 
 		public Configuration()
 		{
 			OctopusHost = new Uri(ConfigurationManager.AppSettings["OctopusHost"]);
+			OctopusApiKey = ConfigurationManager.AppSettings["OctopusApiKey"];
 			VariableSetName = ConfigurationManager.AppSettings["VariableSetName"];
 		}
 	}
