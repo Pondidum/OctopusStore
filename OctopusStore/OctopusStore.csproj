@@ -85,13 +85,16 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="FilterConfiguration.cs" />
     <Compile Include="GetVariablesQuery.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IConfiguration.cs" />
+    <Compile Include="IVaraibleFilter.cs" />
     <Compile Include="Models\ValueModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EnvironmentFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
