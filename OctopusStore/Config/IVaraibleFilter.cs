@@ -1,6 +1,6 @@
 ﻿using Octopus.Client.Model;
 
-namespace OctopusStore
+namespace OctopusStore.Config
 {
 	public interface IVaraibleFilter
 	{

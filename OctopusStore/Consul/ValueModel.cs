@@ -1,4 +1,4 @@
-﻿namespace OctopusStore.Models
+﻿namespace OctopusStore.Consul
 {
 	public class ValueModel
 	{

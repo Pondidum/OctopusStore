@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OctopusStore
+namespace OctopusStore.Config
 {
 	public class FilterConfiguration
 	{

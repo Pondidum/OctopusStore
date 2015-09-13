@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OctopusStore
+namespace OctopusStore.Config
 {
 	public interface IConfiguration
 	{

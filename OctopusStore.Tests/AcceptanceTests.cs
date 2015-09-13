@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NSubstitute;
+using OctopusStore.Config;
+using OctopusStore.Octopus;
 using Shouldly;
 using Xunit;
 

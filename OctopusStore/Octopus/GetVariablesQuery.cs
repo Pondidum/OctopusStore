@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client;
+using OctopusStore.Config;
 
-namespace OctopusStore
+namespace OctopusStore.Octopus
 {
 	public class GetVariablesQuery
 	{

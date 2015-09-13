@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client.Model;
 
-namespace OctopusStore
+namespace OctopusStore.Config
 {
 	public class VariableFilter : IVaraibleFilter
 	{

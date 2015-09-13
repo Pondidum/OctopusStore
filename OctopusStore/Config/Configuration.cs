@@ -2,7 +2,7 @@
 using System.Configuration;
 using Newtonsoft.Json;
 
-namespace OctopusStore
+namespace OctopusStore.Config
 {
 	public class Configuration : IConfiguration
 	{
