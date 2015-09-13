@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Conifer;
+using Conifer.Conventions;
+using OctopusStore.Consul;
 
 namespace OctopusStore
 {
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
-            // Web API configuration and services
+	public static class WebApiConfig
+	{
+		public static void Register(HttpConfiguration config)
+		{
+			var router = new Router(config, e =>
+			{
+				e.DefaultConventionsAre(new IRouteConvention[]
+				{
+					new SpecifiedPartRouteConvention("v1"),
+					new MethodNameRouteConvention(),
+					new ParameterNameRouteConvention()
+				});
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-        }
-    }
+				e.AddAll<KeyValueController>();
+			});
+		}
+	}
 }
