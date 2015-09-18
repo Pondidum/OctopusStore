@@ -70,6 +70,26 @@ namespace OctopusStore.Tests
 			});
 		}
 
+		[Fact]
+		public void When_getting_a_single_key()
+		{
+			Request(HttpMethod.Put, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.OK);
+
+			var response = Request(HttpMethod.Get, "v1/kv/web/key1");
+			var body = BodyOf<IEnumerable<ValueModel>>(response);
+
+			body.ShouldBe(new[]
+			{
+				new ValueModel(),
+			});
+		}
+
+		[Fact]
+		public void When_deleting_a_key()
+		{
+			Request(HttpMethod.Delete, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.MethodNotAllowed);
+		}
+
 		public void Dispose()
 		{
 			_server.Dispose();
