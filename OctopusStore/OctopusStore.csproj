@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Conifer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Conifer.3.1.0\lib\net40\Conifer.dll</HintPath>
+      <HintPath>..\packages\Conifer.3.3.1\lib\net40\Conifer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
