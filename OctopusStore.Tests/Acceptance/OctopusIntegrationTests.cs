@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using NSubstitute;
 using OctopusStore.Config;
 using OctopusStore.Octopus;
@@ -8,7 +7,7 @@ using Xunit;
 
 namespace OctopusStore.Tests
 {
-	public class AcceptanceTests
+	public class OctopusIntegrationTests
 	{
 		[Fact(Skip = "Requires an OctopusServer to run")]
 		public void When_querying_an_octopus_api()
