@@ -5,7 +5,7 @@ using OctopusStore.Config;
 
 namespace OctopusStore.Octopus
 {
-	public class GetVariablesQuery
+	public class GetVariablesQuery : IGetVariablesQuery
 	{
 		private readonly IConfiguration _config;
 		private readonly IVaraibleFilter _filter;
