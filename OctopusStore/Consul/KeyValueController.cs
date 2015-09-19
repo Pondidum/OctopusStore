@@ -6,12 +6,12 @@ namespace OctopusStore.Consul
 {
 	public class KeyValueController : ApiController
 	{
-		public HttpResponseMessage GetKv(string key)
+		public HttpResponseMessage GetKv(string keyGreedy)
 		{
 			return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 
-		public HttpResponseMessage PutKv(string key)
+		public HttpResponseMessage PutKv(string keyGreedy)
 		{
 			return new HttpResponseMessage(HttpStatusCode.OK);
 		}

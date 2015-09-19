@@ -18,7 +18,7 @@ namespace OctopusStore
 				{
 					new SpecifiedPartRouteConvention("v1"),
 					new MethodNameRouteConvention(),
-					new ParameterNameRouteConvention()
+					new ParameterNameRouteConvention().DetectGreedyArguments()
 				});
 
 				e.AddAll<KeyValueController>();
