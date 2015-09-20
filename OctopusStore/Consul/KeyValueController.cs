@@ -25,9 +25,13 @@ namespace OctopusStore.Consul
 
 			var recurse = pairs.Any(pair => pair.Key.EqualsIgnore("recurse"));
 
-			return recurse
-				? _store.GetValuesPrefixed(key)
-				: _store.GetValue(key);
+			var values = recurse
+				? _store.GetValuesPrefixed(key).ToList()
+				: _store.GetValue(key).ToList();
+
+			return values.Any()
+				? values
+				: null;
 		}
 
 		public HttpResponseMessage PutKv([FromBody]string content, string keyGreedy)

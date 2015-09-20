@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -97,10 +98,12 @@ namespace OctopusStore.Tests
 			var response = Request(HttpMethod.Get, "v1/kv/web/key1");
 			var body = BodyOf<IEnumerable<ValueModel>>(response);
 
-			body.ShouldBe(new[]
-			{
-				new ValueModel(),
-			});
+			var val1 = body.Single();
+
+			body.ShouldSatisfyAllConditions(
+				() => val1.Key.ShouldBe("web/key1"),
+				() => val1.Value.ShouldBe("dGVzdA==")
+			);
 		}
 
 		[Fact]
