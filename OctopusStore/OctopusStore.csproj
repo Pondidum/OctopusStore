@@ -112,6 +112,7 @@
     <Compile Include="Octopus\IGetVariablesQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\VariableFilter.cs" />
+    <Compile Include="VariableStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

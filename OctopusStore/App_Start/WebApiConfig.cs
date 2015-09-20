@@ -33,6 +33,7 @@ namespace OctopusStore
 				});
 
 				config.For<IConfiguration>().Use<Configuration>().Singleton();
+				config.For<VariableStore>().Use<VariableStore>().Singleton();
 			});
 
 			http.Formatters.Add(new PlainTextMediaTypeFormatter());
