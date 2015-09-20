@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using OctopusStore.Infrastructure;
 
 namespace OctopusStore.Consul
 {
@@ -22,7 +23,7 @@ namespace OctopusStore.Consul
 			var key = keyGreedy ?? string.Empty;
 			var pairs = Request.GetQueryNameValuePairs();
 
-			var recurse = pairs.Any(pair => pair.Key.Equals("recurse", StringComparison.OrdinalIgnoreCase));
+			var recurse = pairs.Any(pair => pair.Key.EqualsIgnore("recurse"));
 
 			return recurse
 				? _store.GetValuesPrefixed(key)
@@ -31,11 +32,16 @@ namespace OctopusStore.Consul
 
 		public HttpResponseMessage PutKv([FromBody]string content, string keyGreedy)
 		{
+			var pairs = Request.GetQueryNameValuePairs();
+
 			_store.WriteValue(keyGreedy, model =>
 			{
 				model.Value = Convert.ToBase64String(Encoding.UTF8.GetBytes(content));
 
-				//if request has "?flags" then write them
+				pairs
+					.Where(p => p.Key.EqualsIgnore("flags"))
+					.Select(p => Convert.ToInt32(p.Value))
+					.DoFirst(value => model.Flags = value);
 			});
 
 			return new HttpResponseMessage(HttpStatusCode.OK);
