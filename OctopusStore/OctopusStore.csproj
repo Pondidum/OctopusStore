@@ -102,6 +102,7 @@
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\FilterConfiguration.cs" />
     <Compile Include="Consul\KeyValueController.cs" />
+    <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Octopus\GetVariablesQuery.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

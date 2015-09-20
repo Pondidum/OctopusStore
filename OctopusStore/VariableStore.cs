@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using OctopusStore.Consul;
+using OctopusStore.Infrastructure;
 
 namespace OctopusStore
 {
@@ -19,7 +20,7 @@ namespace OctopusStore
 
 		public IEnumerable<ValueModel> GetValue(string key)
 		{
-			return _store.Where(model => model.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
+			return _store.Where(model => model.Key.EqualsIgnore(key));
 		}
 
 		public IEnumerable<ValueModel> GetValuesPrefixed(string keyPrefix)
@@ -30,7 +31,7 @@ namespace OctopusStore
 		public void WriteValue(string key, Action<ValueModel> bind)
 		{
 			var index = Interlocked.Increment(ref _offset);
-			var model = _store.FirstOrDefault(m => string.Equals(m.Key, key, StringComparison.OrdinalIgnoreCase));
+			var model = _store.FirstOrDefault(m => m.Key.EqualsIgnore(key));
 
 			if (model == null)
 			{
