@@ -86,7 +86,7 @@ namespace OctopusStore.Tests
 				() => val2.Value.ShouldBe("dGVzdA=="),
 				() => val3.Value.ShouldBe("dGVzdA=="),
 				() => val2.Flags.ShouldBe(42)
-            );
+			);
 		}
 
 		[Fact]
