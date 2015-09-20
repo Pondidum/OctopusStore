@@ -36,6 +36,18 @@ namespace OctopusStore.Tests
 				.Result;
 		}
 
+		private void Put(string url, string body)
+		{
+			var result = _server
+				.HttpClient
+				.PutAsync(url, new StringContent(body))
+				.Result;
+
+			result
+				.StatusCode
+				.ShouldBe(HttpStatusCode.OK);
+		}
+
 		private T BodyOf<T>(HttpResponseMessage response)
 		{
 			var json = response
@@ -55,25 +67,32 @@ namespace OctopusStore.Tests
 		[Fact]
 		public void When_getting_keys_after_putting()
 		{
-			Request(HttpMethod.Put, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.OK);
-			Request(HttpMethod.Put, "v1/kv/web/key2?flags=42").StatusCode.ShouldBe(HttpStatusCode.OK);
-			Request(HttpMethod.Put, "v1/kv/web/sub/key3").StatusCode.ShouldBe(HttpStatusCode.OK);
+			Put("v1/kv/web/key1", "test");
+			Put("v1/kv/web/key2?flags=42", "test");
+			Put("v1/kv/web/sub/key3", "test");
 
 			var response = Request(HttpMethod.Get, "v1/kv/?recurse");
-			var body = BodyOf<IEnumerable<ValueModel>>(response);
+			var body = BodyOf<List<ValueModel>>(response);
 
-			body.ShouldBe(new[]
-			{
-				new ValueModel(), 
-				new ValueModel(), 
-				new ValueModel(), 
-			});
+			var val1 = body[0];
+			var val2 = body[1];
+			var val3 = body[2];
+
+			body.ShouldSatisfyAllConditions(
+				() => val1.Key.ShouldBe("web/key1"),
+				() => val2.Key.ShouldBe("web/key2"),
+				() => val3.Key.ShouldBe("web/sub/key3"),
+				() => val1.Value.ShouldBe("dGVzdA=="),
+				() => val2.Value.ShouldBe("dGVzdA=="),
+				() => val3.Value.ShouldBe("dGVzdA=="),
+				() => val2.Flags.ShouldBe(42)
+            );
 		}
 
 		[Fact]
 		public void When_getting_a_single_key()
 		{
-			Request(HttpMethod.Put, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.OK);
+			Put("v1/kv/web/key1", "test");
 
 			var response = Request(HttpMethod.Get, "v1/kv/web/key1");
 			var body = BodyOf<IEnumerable<ValueModel>>(response);
