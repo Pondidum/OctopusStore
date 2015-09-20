@@ -35,6 +35,7 @@ namespace OctopusStore
 				config.For<IConfiguration>().Use<Configuration>().Singleton();
 			});
 
+			http.Formatters.Add(new PlainTextMediaTypeFormatter());
 			http.DependencyResolver = new StructureMapDependencyResolver(container);
 		}
 	}
