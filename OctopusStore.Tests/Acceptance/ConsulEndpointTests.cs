@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
+using NSubstitute;
+using OctopusStore.Config;
 using OctopusStore.Consul;
 using Owin;
 using Shouldly;
@@ -20,12 +22,14 @@ namespace OctopusStore.Tests
 		//https://www.consul.io/intro/getting-started/kv.html
 		public ConsulEndpointTests()
 		{
+			var config = Substitute.For<IConfiguration>();
+
 			_server = TestServer.Create(app =>
 			{
-				var config = new HttpConfiguration();
-				WebApiConfig.Register(config);
+				var http = new HttpConfiguration();
+				WebApiConfig.Register(http, config);
 
-				app.UseWebApi(config);
+				app.UseWebApi(http);
 			});
 		}
 

@@ -12,6 +12,11 @@ namespace OctopusStore
 	{
 		public static void Register(HttpConfiguration http)
 		{
+			Register(http, new Configuration());
+		}
+
+		public static void Register(HttpConfiguration http, IConfiguration config)
+		{
 			var router = new Router(http, e =>
 			{
 				e.DefaultConventionsAre(new IRouteConvention[]
@@ -24,16 +29,16 @@ namespace OctopusStore
 				e.AddAll<KeyValueController>();
 			});
 
-			var container = new Container(config =>
+			var container = new Container(c =>
 			{
-				config.Scan(a =>
+				c.Scan(a =>
 				{
 					a.TheCallingAssembly();
 					a.WithDefaultConventions();
 				});
 
-				config.For<IConfiguration>().Use<Configuration>().Singleton();
-				config.For<VariableStore>().Use<VariableStore>().Singleton();
+				c.For<IConfiguration>().Use(config);
+				c.For<VariableStore>().Use<VariableStore>().Singleton();
 			});
 
 			http.Filters.Add(new NullAsNotFoundFilter());
