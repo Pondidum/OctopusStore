@@ -8,9 +8,9 @@ namespace OctopusStore.Octopus
 	public class GetVariablesQuery : IGetVariablesQuery
 	{
 		private readonly IConfiguration _config;
-		private readonly IVaraibleFilter _filter;
+		private readonly VariableFilter _filter;
 
-		public GetVariablesQuery(IConfiguration config, IVaraibleFilter filter)
+		public GetVariablesQuery(IConfiguration config, VariableFilter filter)
 		{
 			_config = config;
 			_filter = filter;

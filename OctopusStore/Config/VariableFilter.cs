@@ -5,7 +5,7 @@ using Octopus.Client.Model;
 
 namespace OctopusStore.Config
 {
-	public class VariableFilter : IVaraibleFilter
+	public class VariableFilter
 	{
 		private readonly FilterConfiguration _filter;
 
