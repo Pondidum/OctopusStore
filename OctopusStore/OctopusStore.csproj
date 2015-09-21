@@ -110,7 +110,6 @@
     </Compile>
     <Compile Include="Config\IConfiguration.cs" />
     <Compile Include="Consul\ValueModel.cs" />
-    <Compile Include="Octopus\IGetVariablesQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\VariableFilter.cs" />
     <Compile Include="VariableStore.cs" />
