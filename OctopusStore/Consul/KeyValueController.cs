@@ -40,7 +40,7 @@ namespace OctopusStore.Consul
 
 			_store.WriteValue(keyGreedy, model =>
 			{
-				model.Value = Convert.ToBase64String(Encoding.UTF8.GetBytes(content));
+				model.Value = content.ToBase64();
 
 				pairs
 					.Where(p => p.Key.EqualsIgnore("flags"))

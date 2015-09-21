@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace OctopusStore.Infrastructure
 {
@@ -19,6 +20,11 @@ namespace OctopusStore.Infrastructure
 					action(enumerator.Current);
 				}
 			}
+		}
+
+		public static string ToBase64(this string self)
+		{
+			return Convert.ToBase64String(Encoding.UTF8.GetBytes(self));
 		}
 	}
 }
