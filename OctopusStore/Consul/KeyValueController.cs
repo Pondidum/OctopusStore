@@ -34,7 +34,7 @@ namespace OctopusStore.Consul
 				: null;
 		}
 
-		public HttpResponseMessage PutKv([FromBody]string content, string keyGreedy)
+		public HttpStatusCode PutKv([FromBody]string content, string keyGreedy)
 		{
 			var pairs = Request.GetQueryNameValuePairs();
 
@@ -48,7 +48,7 @@ namespace OctopusStore.Consul
 					.DoFirst(value => model.Flags = value);
 			});
 
-			return new HttpResponseMessage(HttpStatusCode.OK);
+			return HttpStatusCode.OK;
 		}
 	}
 }
