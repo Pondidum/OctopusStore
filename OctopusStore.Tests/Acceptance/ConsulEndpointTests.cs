@@ -23,6 +23,11 @@ namespace OctopusStore.Tests
 		public ConsulEndpointTests()
 		{
 			var config = Substitute.For<IConfiguration>();
+			config.OctopusHost.Returns(new Uri("http://172.28.128.20"));
+			config.OctopusApiKey.Returns("API-F6LZ4DWCNSDVWNSXVIOIMA11S");
+			config.VariableSetName.Returns("ConsulSet");
+			config.Filter.Returns(new FilterConfiguration());
+			config.Filter.Environments.Add("dev");
 
 			_server = TestServer.Create(app =>
 			{
