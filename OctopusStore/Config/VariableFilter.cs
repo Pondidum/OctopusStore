@@ -16,22 +16,28 @@ namespace OctopusStore.Config
 
 		public bool ShouldReturnVariable(VariableScopeValues scopeValues, VariableResource variable)
 		{
-			var environments = MapScope(scopeValues.Environments, _filter.Environments);
-			var roles = MapScope(scopeValues.Roles, _filter.Roles);
-			var targets = MapScope(scopeValues.Machines, _filter.Targets);
-
-			var scopes = new Dictionary<ScopeField, ScopeValue>();
-			
-			scopes[ScopeField.Environment] = new ScopeValue(environments);
-			scopes[ScopeField.Role] = new ScopeValue(roles);
-			scopes[ScopeField.Machine] = new ScopeValue(targets);
+			var scopes = BuildScopeMap(scopeValues, _filter);
 
 			return variable
 				.Scope
 				.IsExcludedBy(scopes) == false;
 		}
 
-		private static IEnumerable<string> MapScope(IEnumerable<ReferenceDataItem> collection, IEnumerable<string> config)
+		public static Dictionary<ScopeField, ScopeValue> BuildScopeMap(VariableScopeValues scopeValues, FilterConfiguration filter)
+		{
+			var environments = MapScope(scopeValues.Environments, filter.Environments);
+			var roles = MapScope(scopeValues.Roles, filter.Roles);
+			var targets = MapScope(scopeValues.Machines, filter.Targets);
+
+			return new Dictionary<ScopeField, ScopeValue>
+			{
+				[ScopeField.Environment] = new ScopeValue(environments),
+				[ScopeField.Role] = new ScopeValue(roles),
+				[ScopeField.Machine] = new ScopeValue(targets)
+			};
+		}
+
+		public static IEnumerable<string> MapScope(IEnumerable<ReferenceDataItem> collection, IEnumerable<string> config)
 		{
 			return collection.Join(
 				config,

@@ -9,15 +9,17 @@ namespace OctopusStore.Octopus
 	public class VariableBackingStore : IVariableBackingStore
 	{
 		private readonly GetVariablesQuery _query;
+		private readonly WriteVariableCommand _command;
 
-		public VariableBackingStore(GetVariablesQuery query)
+		public VariableBackingStore(GetVariablesQuery query, WriteVariableCommand command)
 		{
 			_query = query;
+			_command = command;
 		}
 
 		public void Write(ValueModel model)
 		{
-
+			_command.Execute(model.Key, model.Value);
 		}
 
 		public ValueModel Read(string key)

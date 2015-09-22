@@ -9,23 +9,37 @@ namespace OctopusStore.Tests
 {
 	public class OctopusIntegrationTests
 	{
-		[Fact(Skip = "Requires an OctopusServer to run")]
-		public void When_querying_an_octopus_api()
+		private readonly IConfiguration _config;
+		private readonly VariableFilter _filter;
+
+		public OctopusIntegrationTests()
 		{
 			var filterConfig = new FilterConfiguration
 			{
 				Environments = { "dev" }
 			};
 
-			var config = Substitute.For<IConfiguration>();
-			config.OctopusHost.Returns(new Uri("http://172.28.128.20"));
-			config.OctopusApiKey.Returns("API-F6LZ4DWCNSDVWNSXVIOIMA11S");
-			config.VariableSetName.Returns("ConsulSet");
-			config.Filter.Returns(filterConfig);
+			_config = Substitute.For<IConfiguration>();
+			_config.OctopusHost.Returns(new Uri("http://172.28.128.20"));
+			_config.OctopusApiKey.Returns("API-F6LZ4DWCNSDVWNSXVIOIMA11S");
+			_config.VariableSetName.Returns("ConsulSet");
+			_config.Filter.Returns(filterConfig);
 
-			var filter = new VariableFilter(config);
-			var query = new GetVariablesQuery(config, filter);
+			_filter = new VariableFilter(_config);
+		}
+
+		[Fact(Skip = "Requires an OctopusServer to run")]
+		public void When_querying_an_octopus_api()
+		{
+			var query = new GetVariablesQuery(_config, _filter);
 			query.Execute().ShouldNotBeEmpty();
+		}
+
+		[Fact(Skip = "Requires an OctopusServer to run")]
+		public void FactMethodName()
+		{
+			var command = new WriteVariableCommand(_config, _filter);
+			command.Execute("newKey", "newValue");
 		}
 	}
 }
