@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Acceptance\ConsulEndpointTests.cs" />
     <Compile Include="Acceptance\OctopusIntegrationTests.cs" />
+    <Compile Include="Infrastructure\ExtensionsTests\EqualsIgnoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scratchpad.cs" />
   </ItemGroup>
