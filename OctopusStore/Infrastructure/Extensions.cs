@@ -22,6 +22,32 @@ namespace OctopusStore.Infrastructure
 			}
 		}
 
+		public static void ForEach<T>(this IEnumerable<T> self, Action<T> action)
+		{
+			foreach (var item in self)
+			{
+				action(item);
+			}
+		}
+
+		public static IEnumerable<T> OrBlank<T>(this IEnumerable<T> self, Func<T> createBlank)
+		{
+			var enumerator = self.GetEnumerator();
+
+			if (!enumerator.MoveNext())
+			{
+				yield return createBlank();
+			}
+			else
+			{
+				do
+				{
+					yield return enumerator.Current;
+				}
+				while (enumerator.MoveNext());
+			}
+		}
+
 		public static string ToBase64(this string self)
 		{
 			return Convert.ToBase64String(Encoding.UTF8.GetBytes(self));
