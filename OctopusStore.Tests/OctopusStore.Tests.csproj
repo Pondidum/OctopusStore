@@ -104,6 +104,7 @@
     <Compile Include="Infrastructure\ExtensionsTests\DoFirstTests.cs" />
     <Compile Include="Infrastructure\ExtensionsTests\EqualsIgnoreTests.cs" />
     <Compile Include="Infrastructure\ExtensionsTests\ForEachTests.cs" />
+    <Compile Include="Infrastructure\ExtensionsTests\OrBlankTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scratchpad.cs" />
   </ItemGroup>
