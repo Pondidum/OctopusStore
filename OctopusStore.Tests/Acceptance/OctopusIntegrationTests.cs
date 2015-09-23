@@ -29,17 +29,24 @@ namespace OctopusStore.Tests
 		}
 
 		[Fact(Skip = "Requires an OctopusServer to run")]
-		public void When_querying_an_octopus_api()
+		public void When_reading_from_octopus()
 		{
-			var query = new GetVariablesQuery(_config, _filter);
+			var query = new ReadVariablesQuery(_config, _filter);
 			query.Execute().ShouldNotBeEmpty();
 		}
 
 		[Fact(Skip = "Requires an OctopusServer to run")]
-		public void FactMethodName()
+		public void When_writing_to_octopus()
 		{
 			var command = new WriteVariableCommand(_config, _filter);
 			command.Execute("newKey", "newValue");
+		}
+
+		[Fact(Skip = "Requires an OctopusServer to run")]
+		public void When_deleting_from_octopus()
+		{
+			var command = new DeleteVariableCommand(_config, _filter);
+			command.Execute("newKey");
 		}
 	}
 }
