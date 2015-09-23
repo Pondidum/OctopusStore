@@ -31,9 +31,9 @@ namespace OctopusStore.Config
 
 			return new Dictionary<ScopeField, ScopeValue>
 			{
-				[ScopeField.Environment] = new ScopeValue(environments),
-				[ScopeField.Role] = new ScopeValue(roles),
-				[ScopeField.Machine] = new ScopeValue(targets)
+				{ ScopeField.Environment , new ScopeValue(environments)},
+				{ ScopeField.Role , new ScopeValue(roles)},
+				{ ScopeField.Machine , new ScopeValue(targets)}
 			};
 		}
 
@@ -45,6 +45,6 @@ namespace OctopusStore.Config
 				r => r,
 				(s, r) => s.Id,
 				StringComparer.OrdinalIgnoreCase);
-		} 
+		}
 	}
 }
