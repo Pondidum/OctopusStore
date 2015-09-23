@@ -29,6 +29,8 @@ namespace OctopusStore.Consul
 				? _store.GetValuesPrefixed(key).ToList()
 				: _store.GetValue(key).ToList();
 
+			values.ForEach(v => v.Value = v.Value.ToBase64());
+
 			return values.Any()
 				? values
 				: null;
@@ -40,7 +42,7 @@ namespace OctopusStore.Consul
 
 			_store.WriteValue(keyGreedy, model =>
 			{
-				model.Value = content.ToBase64();
+				model.Value = content;
 
 				pairs
 					.Where(p => p.Key.EqualsIgnore("flags"))

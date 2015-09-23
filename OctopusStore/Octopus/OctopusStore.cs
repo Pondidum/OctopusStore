@@ -27,7 +27,7 @@ namespace OctopusStore.Octopus
 			return _query
 				.Execute()
 				.Where(pair => pair.Key.EqualsIgnore(key))
-				.Select(m => new ValueModel { Key = m.Key, Value = m.Value.ToBase64() })
+				.Select(m => new ValueModel { Key = m.Key, Value = m.Value })
 				.FirstOrDefault();
 		}
 
@@ -36,7 +36,7 @@ namespace OctopusStore.Octopus
 			return _query
 				.Execute()
 				.Where(pair => pair.Key.StartsWith(keyPrefix, StringComparison.OrdinalIgnoreCase))
-				.Select(m => new ValueModel { Key = m.Key, Value = m.Value.ToBase64() });
+				.Select(m => new ValueModel { Key = m.Key, Value = m.Value });
 		}
 	}
 }
