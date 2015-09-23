@@ -5,12 +5,12 @@ using OctopusStore.Config;
 
 namespace OctopusStore.Octopus
 {
-	public class GetVariablesQuery
+	public class ReadVariablesQuery
 	{
 		private readonly IConfiguration _config;
 		private readonly VariableFilter _filter;
 
-		public GetVariablesQuery(IConfiguration config, VariableFilter filter)
+		public ReadVariablesQuery(IConfiguration config, VariableFilter filter)
 		{
 			_config = config;
 			_filter = filter;

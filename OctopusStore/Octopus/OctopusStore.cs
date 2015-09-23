@@ -8,10 +8,10 @@ namespace OctopusStore.Octopus
 {
 	public class VariableBackingStore : IVariableBackingStore
 	{
-		private readonly GetVariablesQuery _query;
+		private readonly ReadVariablesQuery _query;
 		private readonly WriteVariableCommand _command;
 
-		public VariableBackingStore(GetVariablesQuery query, WriteVariableCommand command)
+		public VariableBackingStore(ReadVariablesQuery query, WriteVariableCommand command)
 		{
 			_query = query;
 			_command = command;
