@@ -25,7 +25,7 @@ namespace OctopusStore.Tests
 			var config = Substitute.For<IConfiguration>();
 			config.OctopusHost.Returns(new Uri("http://172.28.128.20"));
 			config.OctopusApiKey.Returns("API-F6LZ4DWCNSDVWNSXVIOIMA11S");
-			config.VariableSetName.Returns("ConsulSet");
+			config.VariableSetName.Returns("UnitTestSet");
 			config.Filter.Returns(new FilterConfiguration());
 			config.Filter.Environments.Add("dev");
 
@@ -94,8 +94,7 @@ namespace OctopusStore.Tests
 				() => val3.Key.ShouldBe("web/sub/key3"),
 				() => val1.Value.ShouldBe("dGVzdA=="),
 				() => val2.Value.ShouldBe("dGVzdA=="),
-				() => val3.Value.ShouldBe("dGVzdA=="),
-				() => val2.Flags.ShouldBe(42)
+				() => val3.Value.ShouldBe("dGVzdA==")
 			);
 		}
 
@@ -118,7 +117,7 @@ namespace OctopusStore.Tests
 		[Fact]
 		public void When_deleting_a_key()
 		{
-			Request(HttpMethod.Delete, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.MethodNotAllowed);
+			Request(HttpMethod.Delete, "v1/kv/web/key1").StatusCode.ShouldBe(HttpStatusCode.OK);
 		}
 
 		public void Dispose()

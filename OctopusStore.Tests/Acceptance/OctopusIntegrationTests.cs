@@ -46,7 +46,7 @@ namespace OctopusStore.Tests
 		public void When_deleting_from_octopus()
 		{
 			var command = new DeleteVariableCommand(_config, _filter);
-			command.Execute("newKey");
+			command.Execute("newKey", false);
 		}
 	}
 }

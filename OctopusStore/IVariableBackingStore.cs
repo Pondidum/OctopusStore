@@ -8,5 +8,8 @@ namespace OctopusStore
 		void Write(ValueModel model);
 		ValueModel Read(string key);
 		IEnumerable<ValueModel> ReadPrefixed(string keyPrefix);
+
+		void Delete(string key);
+		void DeletePrefixed(string key);
 	}
 }

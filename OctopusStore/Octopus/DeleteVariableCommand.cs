@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Octopus.Client;
 using OctopusStore.Config;
 using OctopusStore.Infrastructure;
@@ -16,7 +17,7 @@ namespace OctopusStore.Octopus
 			_filter = filter;
 		}
 
-		public void Execute(string key)
+		public void Execute(string key, bool recursive)
 		{
 			var factory = new OctopusClientFactory();
 			var client = factory.CreateClient(new OctopusServerEndpoint(_config.OctopusHost + "api", _config.OctopusApiKey));
@@ -28,7 +29,7 @@ namespace OctopusStore.Octopus
 			variableSet
 				.Variables
 				.Where(v => _filter.ShouldReturnVariable(variableSet.ScopeValues, v))
-				.Where(v => v.Name.EqualsIgnore(key))
+				.Where(v => recursive ? v.Name.StartsWith(key, StringComparison.OrdinalIgnoreCase) : v.Name.EqualsIgnore(key))
 				.ToList()
 				.ForEach(v => variableSet.Variables.Remove(v));
 
