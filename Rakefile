@@ -12,7 +12,7 @@ ci_commit = ENV['APPVEYOR_REPO_COMMIT'] ||= "0"
 tool_nuget = 'tools/nuget/nuget.exe'
 tool_xunit = 'tools/xunit/xunit.console.clr4.exe'
 
-@project_name = 'CrossLink'
+@project_name = 'OctopusStore'
 @project_version = read_semver
 
 project_output = 'build/bin'
