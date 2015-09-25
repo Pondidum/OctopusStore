@@ -104,6 +104,7 @@
     <Compile Include="Config\FilterConfiguration.cs" />
     <Compile Include="Consul\KeyValueController.cs" />
     <Compile Include="Infrastructure\Extensions.cs" />
+    <Compile Include="Octopus\CommandBase.cs" />
     <Compile Include="Octopus\DeleteVariableCommand.cs" />
     <Compile Include="Octopus\ReadVariablesQuery.cs" />
     <Compile Include="Global.asax.cs">

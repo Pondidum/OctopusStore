@@ -1,18 +1,17 @@
 using System.Linq;
 using Conifer;
-using Octopus.Client;
 using Octopus.Client.Model;
 using OctopusStore.Config;
 using OctopusStore.Infrastructure;
 
 namespace OctopusStore.Octopus
 {
-	public class WriteVariableCommand
+	public class WriteVariableCommand : CommandBase
 	{
 		private readonly IConfiguration _config;
 		private readonly VariableFilter _filter;
 
-		public WriteVariableCommand(IConfiguration config, VariableFilter filter)
+		public WriteVariableCommand(IConfiguration config, VariableFilter filter) : base(config)
 		{
 			_config = config;
 			_filter = filter;
@@ -20,13 +19,8 @@ namespace OctopusStore.Octopus
 
 		public void Execute(string key, string value)
 		{
-			var factory = new OctopusClientFactory();
-			var client = factory.CreateClient(new OctopusServerEndpoint(_config.OctopusHost + "api", _config.OctopusApiKey));
-			var repo = new OctopusRepository(client);
-
-			var libararySet = repo.LibraryVariableSets.FindOne(vs => vs.Name == _config.VariableSetName);
-			var variableSet = repo.VariableSets.Get(libararySet.VariableSetId);
-
+			var variableSet = GetVariableSet();
+			
 			variableSet
 				.Variables
 				.Where(v => _filter.ShouldReturnVariable(variableSet.ScopeValues, v))
@@ -34,7 +28,7 @@ namespace OctopusStore.Octopus
 				.OrBlank(() => CreateVariable(key, variableSet))
 				.ForEach(v => v.Value = value);
 
-			repo.VariableSets.Modify(variableSet);
+			Modify(variableSet);
 		}
 
 		private VariableResource CreateVariable(string key, VariableSetResource variableSet)

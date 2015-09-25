@@ -1,29 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Octopus.Client;
 using OctopusStore.Config;
 
 namespace OctopusStore.Octopus
 {
-	public class ReadVariablesQuery
+	public class ReadVariablesQuery : CommandBase
 	{
-		private readonly IConfiguration _config;
 		private readonly VariableFilter _filter;
 
-		public ReadVariablesQuery(IConfiguration config, VariableFilter filter)
+		public ReadVariablesQuery(IConfiguration config, VariableFilter filter) : base(config)
 		{
-			_config = config;
 			_filter = filter;
 		}
 
 		public IEnumerable<KeyValuePair<string, string>> Execute()
 		{
-			var factory = new OctopusClientFactory();
-			var client = factory.CreateClient(new OctopusServerEndpoint(_config.OctopusHost + "api", _config.OctopusApiKey));
-			var repo = new OctopusRepository(client);
-
-			var libararySet = repo.LibraryVariableSets.FindOne(vs => vs.Name == _config.VariableSetName);
-			var variableSet = repo.VariableSets.Get(libararySet.VariableSetId);
+			var variableSet = GetVariableSet();
 
 			return variableSet
 				.Variables
