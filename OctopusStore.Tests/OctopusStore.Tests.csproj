@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceptance\ConsulEndpointTests.cs" />
+    <Compile Include="Acceptance\GettingStarted.cs" />
     <Compile Include="Acceptance\OctopusIntegrationTests.cs" />
     <Compile Include="Infrastructure\ExtensionsTests\DoFirstTests.cs" />
     <Compile Include="Infrastructure\ExtensionsTests\EqualsIgnoreTests.cs" />
